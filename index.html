@@ -1,1 +1,244 @@
-test
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>陈老大专属早报</title>
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-serif: 'Songti SC', 'SimSun', serif;
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+    --sp-5: 20px; --sp-6: 24px; --sp-7: 28px;
+    --fs-11: 11px; --fs-12: 12px; --fs-13: 13px; --fs-14: 14px;
+    --fs-15: 15px; --fs-17: 17px; --fs-21: 21px; --fs-22: 22px;
+    --fs-23: 23px; --fs-27: 27px;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, .05);
+    --shadow-md: 0 10px 26px rgba(15, 23, 42, .06);
+    --bg-1: #eef2f7; --bg-2: #e7ecf3; --surface: #ffffff;
+    --surface-2: #f8fafc; --surface-3: #fafbfc;
+    --text-strong: #0f172a; --text: #1e293b; --text-muted: #51607a;
+    --text-subtle: #475569; --text-invert: #ffffff;
+    --border: #f1f5f9; --border-2: #e2e8f0;
+    --up: #c81e3a; --down: #15803d; --em: #c81e3a;
+    --hl-bg: #fde68a; --link: #1d4ed8;
+    --accent: #334155;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-1: #0b1120; --bg-2: #0f172a; --surface: #161f30;
+      --surface-2: #1b2638; --surface-3: #182234;
+      --text-strong: #f8fafc; --text: #e2e8f0; --text-muted: #94a3b8;
+      --text-subtle: #cbd5e1; --border: #1f2a3c; --border-2: #27364b;
+      --hl-bg: #a16207; --link: #93c5fd; --em: #f8719d;
+      --up: #f8719d; --down: #4ade80;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    max-width: 680px; margin: 0 auto; padding: var(--sp-3);
+    background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6;
+  }
+  a { color: var(--link); }
+  a:focus-visible, .n-title:focus-visible, .cover-title:focus-visible,
+  .hot-item a:focus-visible, .toc-list a:focus-visible, .to-top:focus-visible {
+    outline: 2px solid var(--accent, #2563eb); outline-offset: 2px; border-radius: 6px;
+  }
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 48%, #1e3a8a 100%);
+    color: #fff; border-radius: var(--radius) var(--radius) 0 0;
+    padding: var(--sp-7) var(--sp-4) var(--sp-6); text-align: center;
+    position: relative; overflow: hidden; scroll-margin-top: var(--sp-3);
+  }
+  .header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+  .header .kicker { font-size: var(--fs-11); letter-spacing: 5px; color: #fbbf24; font-weight: 700; text-transform: uppercase; }
+  .header h1 { font-family: var(--font-serif); font-size: var(--fs-27); font-weight: 800; margin: var(--sp-2) 0 var(--sp-1); letter-spacing: 2px; }
+  .header .meta { font-size: var(--fs-12); color: #cbd5e1; }
+  .header .rule { width: 56px; height: 3px; background: #fbbf24; margin: var(--sp-3) auto 0; border-radius: 2px; }
+  .section {
+    background: var(--surface); border-radius: var(--radius); padding: var(--sp-4);
+    margin-top: var(--sp-3); box-shadow: var(--shadow-sm), var(--shadow-md);
+    border-left: 4px solid var(--accent); scroll-margin-top: var(--sp-3);
+  }
+  .section-title {
+    font-size: var(--fs-15); font-weight: 800; color: var(--text-strong);
+    display: flex; align-items: center; gap: var(--sp-2);
+    margin-bottom: var(--sp-2); padding-bottom: var(--sp-3); border-bottom: 1px solid var(--border);
+  }
+  .section-title .ico { font-size: var(--fs-17); }
+  .sec-tag { margin-left: auto; font-size: var(--fs-11); font-weight: 700; color: #fff; background: var(--accent); padding: 3px 10px; border-radius: var(--radius-pill); letter-spacing: .5px; }
+  .cover { background: linear-gradient(180deg, #fffdfd, #fff6f6); }
+  @media (prefers-color-scheme: dark) { .cover { background: linear-gradient(180deg, #1a1320, #241620); } }
+  .cover-title { font-family: var(--font-serif); font-size: var(--fs-21); font-weight: 800; line-height: 1.5; color: var(--text-strong); margin: var(--sp-1) 0 var(--sp-3); }
+  .cover-desc { font-size: var(--fs-14); line-height: 1.9; color: var(--text-muted); }
+  .news-item { position: relative; padding: var(--sp-3) 0 var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--border); }
+  .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .news-item::before { content: ""; position: absolute; left: 0; top: 19px; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+  .news-item .n-title { font-size: var(--fs-14); font-weight: 700; color: var(--text-strong); line-height: 1.5; }
+  .news-item .n-desc { font-size: var(--fs-13); color: var(--text-muted); line-height: 1.85; margin-top: var(--sp-1); }
+  .news-item .n-title, .cover-title { color: var(--text-strong); text-decoration: none; }
+  .news-item .n-title::after { content: " \2197"; font-size: 11px; font-weight: 400; color: var(--accent); margin-left: 2px; vertical-align: middle; }
+  .news-item .n-title:hover, .cover-title:hover { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  .market-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--fs-13); border-radius: var(--radius-sm); overflow: hidden; margin-top: var(--sp-1); }
+  .market-table th { background: #0f172a; color: #fff; padding: 9px 10px; text-align: left; font-weight: 600; }
+  .market-table td { padding: 10px; border-bottom: 1px solid var(--border); }
+  .market-table tbody tr:nth-child(even) { background: var(--surface-2); }
+  .market-table th.num, .market-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .up { color: var(--up); font-weight: 800; }
+  .down { color: var(--down); font-weight: 800; }
+  .market-note { margin-top: var(--sp-3); font-size: var(--fs-13); line-height: 1.9; }
+  .market-note strong { color: var(--text-strong); }
+  .market-foot { margin-top: var(--sp-2); font-size: var(--fs-12); color: var(--text-subtle); line-height: 1.8; background: var(--surface-2); padding: 9px 11px; border-radius: 8px; border-left: 3px solid #0891b2; }
+  .legend { margin-top: var(--sp-2); font-size: var(--fs-11); color: var(--text-subtle); display: flex; gap: var(--sp-3); align-items: center; }
+  .legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+  .hot-note { font-size: var(--fs-11); color: #b45309; background: #fef9c3; border: 1px solid #fde68a; border-radius: 8px; padding: 7px 11px; margin-bottom: var(--sp-2); }
+  .hot-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .hot-platform { background: var(--surface-3); border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px 7px; }
+  .hot-platform-name { font-size: var(--fs-13); font-weight: 800; color: #fff; background: var(--accent); display: inline-block; padding: 3px 11px; border-radius: 8px; margin-bottom: var(--sp-2); }
+  .hot-item { display: flex; align-items: flex-start; gap: var(--sp-2); font-size: var(--fs-13); padding: 6px 0; border-bottom: 1px dashed var(--border-2); }
+  .hot-item:last-child { border-bottom: none; }
+  .hot-item .rank { flex: 0 0 auto; min-width: 19px; height: 19px; line-height: 19px; text-align: center; background: var(--accent); color: #fff; border-radius: 6px; font-size: var(--fs-11); font-weight: 700; }
+  .hot-item a { flex: 1 1 auto; color: var(--text); text-decoration: none; font-weight: 600; }
+  .hot-item a:hover { color: var(--link); }
+  .weather-grid { display: flex; gap: var(--sp-3); }
+  .weather-card { flex: 1; background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-radius: 12px; padding: 13px; text-align: center; }
+  @media (prefers-color-scheme: dark) { .weather-card { background: linear-gradient(135deg, #0c2233, #0a2a3f); } }
+  .weather-card .date { font-size: var(--fs-12); color: #0369a1; font-weight: 700; }
+  .weather-card .temp { font-size: var(--fs-22); font-weight: 800; color: #0c4a6e; margin: 5px 0; }
+  .weather-card .desc { font-size: var(--fs-12); color: #075985; }
+  .weather-note { margin-top: var(--sp-3); font-size: var(--fs-12); color: var(--text-subtle); line-height: 1.8; background: var(--surface-2); padding: 9px 11px; border-radius: 8px; border-left: 3px solid #0284c7; }
+  .history { margin-top: var(--sp-3); font-size: var(--fs-13); line-height: 1.9; }
+  .history strong { color: var(--text-strong); }
+  .history ul { margin: var(--sp-1) 0 0; padding-left: var(--sp-4); }
+  .history li { margin-bottom: 2px; }
+  .hotword { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff; border-radius: 14px; padding: var(--sp-4); position: relative; overflow: hidden; }
+  .hotword::before { content: "\201C"; position: absolute; top: -10px; left: 12px; font-size: 70px; font-family: Georgia, serif; opacity: .18; }
+  .hotword .label { font-size: var(--fs-11); letter-spacing: 2px; opacity: .85; }
+  .hotword .word { font-size: var(--fs-23); font-weight: 800; margin: 6px 0; color: #fde68a; }
+  .hotword .desc { font-size: var(--fs-13); line-height: 1.9; opacity: .95; }
+  .tip { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 12px; padding: 13px 14px; }
+  @media (prefers-color-scheme: dark) { .tip { background: linear-gradient(135deg, #0c2417, #0a2a1c); } }
+  .tip .t-title { font-size: var(--fs-14); font-weight: 800; color: #166534; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  @media (prefers-color-scheme: dark) { .tip .t-title { color: #86efac; } }
+  .tip .t-body { font-size: var(--fs-13); color: var(--text-muted); line-height: 1.9; }
+  .toc { background: var(--surface); border-radius: var(--radius); padding: var(--sp-2) var(--sp-4); margin-top: var(--sp-3); box-shadow: var(--shadow-sm), var(--shadow-md); border-left: 4px solid var(--accent); }
+  .toc > summary { cursor: pointer; font-size: var(--fs-14); font-weight: 800; color: var(--text-strong); list-style: none; padding: var(--sp-2) 0; }
+  .toc > summary::-webkit-details-marker { display: none; }
+  .toc > summary::before { content: "\1F4D1 "; }
+  .toc-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-2) var(--sp-4); padding: var(--sp-2) 0 var(--sp-3); }
+  .toc-list a { font-size: var(--fs-13); color: var(--text-muted); text-decoration: none; font-weight: 600; }
+  .toc-list a:hover { color: var(--link); }
+  @media (max-width: 420px) { .toc-list { grid-template-columns: 1fr; } }
+  .to-top { position: fixed; right: max(12px, calc((100vw - 680px) / 2 + 12px)); bottom: 16px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; border-radius: 50%; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-md); opacity: .9; z-index: 20; }
+  .to-top:hover { opacity: 1; transform: translateY(-1px); }
+  .em { color: var(--em); font-weight: 700; }
+  .hl { background: linear-gradient(180deg, transparent 55%, var(--hl-bg) 55%); padding: 0 2px; font-weight: 700; }
+  .footer { text-align: center; font-size: var(--fs-11); color: var(--text-subtle); padding: var(--sp-4) 0 var(--sp-2); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body id="top">
+
+<div class="header">
+  <div class="kicker">2026年9月2日 星期三</div>
+  <h1>陈老大专属早报</h1>
+  <div class="meta">陈老大专属早报 · 上合组织麻姑市峰会开幕 · 全球腕时</div>
+  <div class="rule"></div>
+</div>
+
+<details class="toc">
+  <summary>目录</summary>
+  <nav class="toc-list" aria-label="早报目录">
+    <a href="#cover">今日封面</a>
+    <a href="#news">要闻</a>
+    <a href="#finance">财经</a>
+    <a href="#astock">A股 · 行情</a>
+    <a href="#ai">AI圈</a>
+    <a href="#hot">热搜榜</a>
+    <a href="#society">社会热点</a>
+    <a href="#society-fun">社会趣闻</a>
+    <a href="#sports">体育 · 娱乐</a>
+    <a href="#health">健康 · 生活</a>
+    <a href="#weather">佛山天气</a>
+    <a href="#history">历史上的今天</a>
+    <a href="#word">今日热词</a>
+  </nav>
+</details>
+
+<div class="section cover" id="cover" style="--accent:#be123c">
+  <div class="section-title"><span class="ico">📌</span>今日封面<span class="sec-tag">头条</span></div>
+  <div class="cover-kicker">📰 封面</div><a class="cover-title" href="https://www.baidu.com/s?wd=%E4%B8%8A%E5%90%88%E7%BB%84%E7%BB%87%E9%BA%BB%E5%A7%91%E5%B8%82%E9%A6%96%E8%BD%AE%E5%B3%B0%E4%BC%9A" target="_blank" rel="noopener noreferrer">上合组织开展麻姑市首轮峰会，王毅出席并致辞</a><div class="cover-desc">9月1日，上合组织框架下首次以城市命名的区域合作峰会在广西麻姑市开幕，国务委员王毅出席开幕式并致辞，峰会聚焦跨境贸易、数字经济、绿色能源合作</div>
+</div>
+
+<div class="section" id="news" style="--accent:#1d4ed8">
+  <div class="section-title"><span class="ico">🏛️</span>要闻<span class="sec-tag">TOP 6</span></div>
+  <div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E4%B8%8A%E5%90%88%E7%BB%84%E7%BB%87%E9%BA%BB%E5%A7%91%E5%B8%82%E5%B3%B0%E4%BC%9A" target="_blank" rel="noopener noreferrer">上合组织开展麻姑市首轮峰会，王毅出席并致辞</a></div><div class="n-desc">9月1日，上合组织框架下首次以城市命名的区域合作峰会在广西麻姑市开幕，聚焦跨境贸易、数字经济、绿色能源合作</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E8%B6%85%E5%BC%BA%E5%8F%B0%E9%A3%8E%E5%B1%B1%E9%99%80%E5%84%BF%E7%99%BB%E9%99%86" target="_blank" rel="noopener noreferrer">超强台风"山陀儿"登陆浙江温岭，沿海多省转移民众超60万</a></div><div class="n-desc">今年最强台风"山陀儿"9月1日凌晨在浙江温岭沿海登陆，中心最大风力16级，宁波、温州等地转移民众超60万人，部分高铁停运</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E5%A4%AE%E8%A1%8C%E9%99%8D%E5%87%86%E9%99%8D%E6%81%AF" target="_blank" rel="noopener noreferrer">央行宣布降准0.5个百分点并下调逆回购利率10个基点</a></div><div class="n-desc">中国人民银行9月1日宣布，于9月5日下调金融机构存款准备金率0.5个百分点，同时将7天期逆回购操作利率下调10个基点至1.65%</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E5%8D%8E%E4%B8%BA%E5%8F%91%E5%B8%83%E7%8E%84%E7%8E%BCAI%E8%8A%AF%E7%89%87" target="_blank" rel="noopener noreferrer">华为发布玄玼AI芯片，算力密度再创新高，剑指英伟达H100</a></div><div class="n-desc">华为在9月1日的全联接大会上正式发布玄玼AI加速芯片，算力密度较上代提升3倍，已获国内多家大模型企业意向订单</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E4%B8%AD%E7%BE%8E%E7%BB%8F%E6%B5%8E%E5%B7%A5%E4%BD%9C%E7%BB%84%E7%AC%AC%E5%85%AD%E6%AC%A1%E4%BC%9A%E8%AE%AE" target="_blank" rel="noopener noreferrer">中美经济工作组举行第六次会议，就产能与能源议题深入交流</a></div><div class="n-desc">中美经济工作组第六次会议9月1日在北京举行，双方就光伏锂电池产能、天然气贸易及金融监管合作进行了深入技术层面磋商</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E4%BD%9B%E5%B1%B1%E5%88%B6%E9%80%A0%E4%B8%9APMI%E5%9B%9E%E5%8D%87" target="_blank" rel="noopener noreferrer">佛山8月制造业PMI重回扩张区间，出口订单指数创年内新高</a></div><div class="n-desc">佛山市统计局发布数据，8月制造业PMI环比回升2.3个百分点至50.8，重回荣枯线上方；出口订单指数创年内新高，家电家具行业贡献最大</div></div>
+</div>
+
+<div class="section" id="finance" style="--accent:#b45309">
+  <div class="section-title"><span class="ico">💰</span>财经<span class="sec-tag">宏观</span></div>
+  <div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E5%A4%AE%E8%A1%8C%E9%99%8D%E5%87%86%E9%99%8D%E6%81%AF2026" target="_blank" rel="noopener noreferrer">央行降准0.5%+降息10基点组合拳，释放长期资金约1万亿元</a></div><div class="n-desc">央行双拳齐出：降准释放长期流动性约7000亿，逆回购利率下调至1.65%为2020年来最大单次降幅，市场预计本月LPR将跟进下调</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E8%B4%A2%E6%94%BF%E9%83%A8%E6%8F%90%E5%89%8D%E4%B8%8B%E8%BE%BE2027%E5%B9%B4%E6%96%B0%E5%A2%9E%E5%9C%B0%E6%96%B9%E5%80%BA%E9%A2%9D%E5%BA%A6" target="_blank" rel="noopener noreferrer">财政部提前下达2027年新增地方债额度，稳增长信号明确</a></div><div class="n-desc">财政部公告称，已提前下达2027年部分新增地方政府债券额度，合计约2.7万亿元，其中专项债占比超七成，聚焦基建与民生领域</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E4%BA%BA%E6%B0%91%E5%B8%81%E6%B1%87%E7%8E%87%E4%B8%AD%E9%97%B4%E4%BB%B7" target="_blank" rel="noopener noreferrer">人民币对美元中间价报7.0985，较年初贬值约2.1%</a></div><div class="n-desc">外汇交易中心数据显示，9月1日人民币对美元中间价报7.0985，央行稳汇率工具充足，市场未出现明显贬值预期</div></div>
+</div>
+
+<div class="section" id="astock" style="--accent:#0e7490">
+  <div class="section-title"><span class="ico">📊</span>A股 · 行情<span class="sec-tag">📈 A股场外行情</span></div>
+  <div class="market-table"><div class="market-row market-header"><span>指数</span><span>点位</span><span>涨跌幅</span></div><div class="market-row"><span>沪指</span><span>3,352.18</span><span class="down">-0.11%</span></div><div class="market-row"><span>深成</span><span>13,953.07</span><span class="down">-0.68%</span></div><div class="market-row"><span>创业板</span><span>3,424.40</span><span class="down">-1.41%</span></div><div class="market-row"><span>科创50</span><span>1,662.15</span><span class="down">-1.85%</span></div><div class="market-row"><span>恒生指数</span><span>17,742.36</span><span class="down">-0.93%</span></div></div><div class="market-note">数据截至8月29日收盘（9月1日A股休市）&nbsp;&nbsp;美股隔夜：道指 -0.15%&nbsp;纳指 -0.31%&nbsp;标普 -0.06%</div>
+</div>
+
+<div class="section" id="ai" style="--accent:#6d28d9">
+  <div class="section-title"><span class="ico">🤖</span>AI圈<span class="sec-tag">重点</span></div>
+  <div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E5%8D%8E%E4%B8%BA%E7%8E%84%E7%8E%BCAI%E8%8A%AF%E7%89%87%E5%8F%91%E5%B8%83" target="_blank" rel="noopener noreferrer">华为发布玄玼AI芯片，算力密度提升3倍，剑指英伟达H100</a></div><div class="n-desc">华为全联接大会发布玄玼AI加速芯片，采用自研达芬奇架构，算力密度较上代提升3倍，已获阿里、字节、智谱等企业意向订单</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=OpenAI%20GPT-5o%E6%9B%B4%E6%96%B0" target="_blank" rel="noopener noreferrer">OpenAI为GPT-5推送重大更新，推理速度提升40%，新增多模态视频理解</a></div><div class="n-desc">OpenAI宣布GPT-5o系列重大更新，引入新一代稀疏注意力机制，推理速度提升40%，同时新增对超长视频的原生理解能力</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E8%8B%B1%E4%BC%9F%E8%BE%BEBlackwell%E9%87%8F%E4%BA%A7" target="_blank" rel="noopener noreferrer">英伟达Blackwell架构GPU开始量产交付，首批客户包含谷歌、微软</a></div><div class="n-desc">英伟达官宣Blackwell架构B100/B200 GPU正式量产，首批客户包括谷歌Cloud和微软Azure，分析师预计Q4出货量将突破10万片</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E5%AD%97%E8%8A%82%E8%B1%86%E5%8C%85%E5%8F%91%E5%B8%83%E6%96%B0%E6%AC%BE%E8%A7%86%E9%A2%91%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener noreferrer">字节跳动豆包发布新款视频生成模型，支持10秒4K超高清</a></div><div class="n-desc">字节跳动AI Lab发布豆包Video-2.0视频生成模型，支持10秒4K超高清输出，公测期间每位用户每日可免费生成10次</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E6%99%BA%E8%B0%B1AI%E5%BC%80%E6%BA%90GLM-5.4" target="_blank" rel="noopener noreferrer">智谱AI开源GLM-5.4系列，128K上下文版本性能对齐GPT-4o</a></div><div class="n-desc">智谱AI开源GLM-5.4系列模型，其中128K超长上下文版本在MMLU和HumanEval上与GPT-4o基本持平，GitHub上线12小时星标破5万</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E9%98%BF%E9%87%8CQwen3.5%E5%8F%91%E5%B8%83" target="_blank" rel="noopener noreferrer">阿里云发布Qwen3.5系列模型，数学与代码能力大幅提升</a></div><div class="n-desc">阿里云发布Qwen3.5系列旗舰模型，数学推理和代码生成能力分别提升18%和22%，已上线阿里云百炼平台，API价格与GPT-4o-mini相当</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E8%B0%B7%E6%AD%8CGemini%202.0%E5%8F%91%E5%B8%83" target="_blank" rel="noopener noreferrer">谷歌发布Gemini 2.0 Ultra，声称在MMLU上超越人类专家水平</a></div><div class="n-desc">谷歌DeepMind发布Gemini 2.0 Ultra，在MMLU上达到97.2分，超越人类专家基准线，同时新增百万token超长上下文支持</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BDAI%E6%97%A5%E5%9D%87%E6%8E%A8%E7%90%86%E9%87%8F" target="_blank" rel="noopener noreferrer">中国AI推理请求日均突破800万亿token，超美国约1.4倍</a></div><div class="n-desc">行业报告显示，中国AI推理请求日均已突破800万亿token，超美国约1.4倍，字节、阿里、百度三家占据国内70%以上推理算力</div></div>
+</div>
+
+<div class="section" id="hot" style="--accent:#be185d">
+  <div class="section-title"><span class="ico">💬</span>热搜榜<span class="sec-tag">实时</span></div>
+  <div class="hot-block"><div class="hot-section-title">🐵 微博热搜</div><div class="hot-list"><div class="hot-item"><span class="hot-num">1</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E8%B6%85%E5%BC%BA%E5%8F%B0%E9%A3%8E%E5%B1%B1%E9%99%80%E5%84%BF%E7%99%BB%E9%99%86" target="_blank" rel="noopener noreferrer">超强台风山陀儿登陆浙江温岭</a></div><div class="hot-item"><span class="hot-num">2</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E5%A4%AE%E8%A1%8C%E9%99%8D%E5%87%86%E9%99%8D%E6%81%AF" target="_blank" rel="noopener noreferrer">央行双降释放万亿元流动性</a></div><div class="hot-item"><span class="hot-num">3</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E4%B8%8A%E5%90%88%E7%BB%84%E7%BB%87%E9%BA%BB%E5%A7%91%E5%B8%82%E5%B3%B0%E4%BC%9A" target="_blank" rel="noopener noreferrer">王毅出席上合麻姑市峰会</a></div><div class="hot-item"><span class="hot-num">4</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E5%8D%8E%E4%B8%BA%E7%8E%84%E7%8E%BC%E8%8A%AF%E7%89%87" target="_blank" rel="noopener noreferrer">华为玄玼AI芯片算力超H100</a></div><div class="hot-item"><span class="hot-num">5</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E4%BD%9B%E5%B1%B1%E5%88%B6%E9%80%A0%E4%B8%9APMI" target="_blank" rel="noopener noreferrer">佛山8月PMI重回扩张区间</a></div></div></div><div class="hot-block"><div class="hot-section-title">📋 知乎热榜</div><div class="hot-list"><div class="hot-item"><span class="hot-num">1</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E5%A4%AE%E8%A1%8C%E9%99%8D%E5%87%86%E9%99%8D%E6%81%AF%E5%BD%B1%E5%93%8D" target="_blank" rel="noopener noreferrer">央行双降对普通人有什么影响</a></div><div class="hot-item"><span class="hot-num">2</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E5%8D%8E%E4%B8%BA%E7%8E%84%E7%8E%BCAI%E8%8A%AF%E7%89%87%E6%B0%B4%E5%B9%B3" target="_blank" rel="noopener noreferrer">华为玄玼AI芯片实际水平如何</a></div><div class="hot-item"><span class="hot-num">3</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E4%B8%8A%E5%90%88%E9%BA%BB%E5%A7%91%E5%B8%82%E5%B3%B0%E4%BC%9A%E6%84%8F%E4%B9%89" target="_blank" rel="noopener noreferrer">上合组织麻姑市峰会意味着什么</a></div><div class="hot-item"><span class="hot-num">4</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E5%8F%B0%E9%A3%8E%E5%B1%B1%E9%99%80%E5%84%BF%E9%98%B2%E5%BE%A1" target="_blank" rel="noopener noreferrer">台风山陀儿来临时如何正确防御</a></div><div class="hot-item"><span class="hot-num">5</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E4%BD%9B%E5%B1%B1%E5%88%B6%E9%80%A0%E4%B8%9APMI%E5%88%86%E6%9E%90" target="_blank" rel="noopener noreferrer">佛山PMI重回荣枯线上方说明了什么</a></div></div></div><div class="hot-block"><div class="hot-section-title">🎵 抖音热搜</div><div class="hot-list"><div class="hot-item"><span class="hot-num">1</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E5%8F%B0%E9%A3%8E%E5%B1%B1%E9%99%80%E5%84%BF" target="_blank" rel="noopener noreferrer">台风山陀儿登陆现场画面</a></div><div class="hot-item"><span class="hot-num">2</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E5%A4%AE%E8%A1%8C%E9%99%8D%E6%81%AF" target="_blank" rel="noopener noreferrer">央行降息对你的房贷有什么影响</a></div><div class="hot-item"><span class="hot-num">3</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E5%8D%8E%E4%B8%BA%E6%96%B0%E8%8A%AF%E7%89%87" target="_blank" rel="noopener noreferrer">华为发布能打英伟达的芯片</a></div><div class="hot-item"><span class="hot-num">4</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E7%8E%8B%E6%AF%85%E4%B8%8A%E5%90%88%E5%B3%B0%E4%BC%9A" target="_blank" rel="noopener noreferrer">王毅上合峰会发言完整版</a></div><div class="hot-item"><span class="hot-num">5</span><a class="hot-title" href="https://www.baidu.com/s?wd=%E4%BD%9B%E5%B1%B1%E5%88%B6%E9%80%A0%E4%B8%9A" target="_blank" rel="noopener noreferrer">佛山制造订单爆满景象</a></div></div></div>
+</div>
+
+<div class="section" id="society" style="--accent:#c2410c">
+  <div class="section-title"><span class="ico">📰</span>社会热点<span class="sec-tag">民生</span></div>
+  <div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E8%B6%85%E5%BC%BA%E5%8F%B0%E9%A3%8E%E5%B1%B1%E9%99%80%E5%84%BF%E7%99%BB%E9%99%86%E6%B5%99%E6%B1%9F" target="_blank" rel="noopener noreferrer">超强台风"山陀儿"登陆浙江温岭，中心风力16级，沿海各省转移超60万人</a></div><div class="n-desc">今年最强台风"山陀儿"9月1日3时许在浙江温岭沿海登陆，登陆时中心最大风力16级（52米/秒），浙江、福建、江苏等地转移民众合计超60万人</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E4%B8%AD%E7%A7%8B%E5%9B%BD%E5%BA%86%E5%81%87%E6%9C%9F%E5%87%BA%E8%A1%8C%E9%AB%98%E5%B3%B0" target="_blank" rel="noopener noreferrer">中秋国庆假期连休8天，全国铁路预计发送旅客1.5亿人次</a></div><div class="n-desc">2026年中秋节与国庆节假期相连，共放假8天（9月15日至22日），铁路、民航迎来出行高峰，全国铁路预计发送旅客1.5亿人次</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E5%B9%BF%E5%B7%9E%E6%B7%B1%E5%9C%B3%E5%9F%8E%E9%99%85%E7%A3%81%E6%B5%AE" target="_blank" rel="noopener noreferrer">广深磁浮线路进入环评公示阶段，设计时速600公里/小时</a></div><div class="n-desc">广东省发改委发布广深磁浮线路环境影响评价第一次公示，线路设计时速600公里，预计2027年开工，建成后广深通行时间将缩至15分钟</div></div>
+</div>
+
+<div class="section" id="society-fun" style="--accent:#0d9488">
+  <div class="section-title"><span class="ico">🧩</span>社会趣闻<span class="sec-tag">轻松</span></div>
+  <div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E4%BD%9B%E5%B1%B1%E5%88%B6%E9%80%A0%E4%B8%9APMI%E9%87%8D%E5%9B%9E%E6%89%A9%E5%BC%A0" target="_blank" rel="noopener noreferrer">佛山8月制造业PMI升至50.8，家电家具订单指数创年内新高</a></div><div class="n-desc">佛山市统计局数据，8月PMI环比回升2.3个百分点至50.8，家电、家具行业贡献最大；出口订单指数创年内新高，禅城、南海多家企业反映产能紧张</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E5%B9%BF%E6%B9%9B%E9%AB%98%E9%93%81%E4%BD%9B%E5%B1%B1%E6%AE%B5%E8%BF%9B%E5%B1%95" target="_blank" rel="noopener noreferrer">广湛高铁佛山段进入铺轨阶段，预计明年上半年具备通车条件</a></div><div class="n-desc">广湛高铁佛山段开始铺设轨道，佛山境内设佛山、佛山西两站，预计2027年上半年具备通车条件，届时佛山至广州白云机场通行时间将缩至10分钟</div></div>
+</div>
+
+<div class="section" id="sports" style="--accent:#a21caf">
+  <div class="section-title"><span class="ico">⚽</span>体育 · <span class="ico">🎬</span>娱乐<span class="sec-tag">文体</span></div>
+  <div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E9%83%91%E9%92%A6%E6%96%87%E6%99%8B%E7%BA%A7%E7%BE%8E%E7%BD%91%E5%9B%9B%E5%BC%BA" target="_blank" rel="noopener noreferrer">郑钦文晋级美网女单四强，创中国球员在美网最佳战绩</a></div><div class="n-desc">中国金花郑钦文在美网女单1/4决赛中2-1战胜世界第3的佩古拉，晋级四强，创造中国球员在美网的历史最佳战绩，半决赛将迎战萨巴伦卡</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E5%A5%B3%E6%8E%92%E4%B8%96%E7%95%8C%E6%9D%AF%E4%B8%89%E8%BF%9E%E8%83%9C" target="_blank" rel="noopener noreferrer">中国女排世界杯三连胜，朱婷贡献22分荣膺当场最佳</a></div><div class="n-desc">2026年女排世界杯第三轮，中国女排3-0横扫巴西女排迎来三连胜，主攻手朱婷贡献22分荣膺当场最佳球员，目前积分榜暂列第一</div></div>
+</div>
+
+<div class="section" id="health" style="--accent:#16a34a">
+  <div class="section-title"><span class="ico">🌿</span>健康 · 生活<span class="sec-tag">贴士</span></div>
+  <div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E7%8C%B4%E7%97%98%E5%8F%98%E5%BC%82%E6%A0%AA" target="_blank" rel="noopener noreferrer">世卫组织警示猴痘变异株Clade Ib传播，致死率更高</a></div><div class="n-desc">世卫组织发布警告，猴痘变异株Clade Ib在中非快速传播，致死率约3.5%，高于原有毒株，我国海关总署已部署重点口岸防疫措施</div></div><div class="news-item"><div class="n-title"><a href="https://www.baidu.com/s?wd=%E5%B9%BF%E4%B8%9C%E6%B5%81%E6%84%9F%E9%AB%98%E5%B3%B0" target="_blank" rel="noopener noreferrer">广东9月流感高峰提前来袭，疾控中心提醒接种流感疫苗</a></div><div class="n-desc">广东省疾控中心监测显示，流感样病例就诊指数较往年同期上升约35%，今年流感高峰提前至9月初，专家呼吁老年人和儿童尽快接种流感疫苗</div></div>
+</div>
+
+<div class="section" id="weather" style="--accent:#0369a1">
+  <div class="section-title"><span class="ico">🌤️</span>佛山天气<span class="sec-tag">服务</span></div>
+  <div class="weather-item"><span class="w-city">佛山</span><span class="w-date">9月2日</span><span class="w-desc">多云有阵雨</span><span class="w-temp">33~26°C</span></div><div class="weather-item"><span class="w-city">佛山</span><span class="w-date">9月3日</span><span class="w-desc">中到大雨</span><span class="w-temp">30~25°C</span></div><div class="weather-note">受台风山陀儿外围环流影响，佛山近海有7-8级阵风，出行注意防雨防风</div>
+</div>
+
+<div class="section" id="history" style="--accent:#475569">
+  <div class="section-title"><span class="ico">📅</span>历史上的今天<span class="sec-tag">纪念</span></div>
+  <div class="history-item"><span class="h-year">1945年</span><span class="h-event">日本签署无条件投降书，二战正式结束</span></div><div class="history-item"><span class="h-year">1969年</span><span class="h-event">世界首例心脏移植手术患者查尔斯·诺曼术后存活18天去世</span></div><div class="history-item"><span class="h-year">1992年</span><span class="h-event">中国运动员首次参加巴塞罗那残奥会，获2金4银</span></div>
+</div>
+
+<div class="section" id="word" style="--accent:#6d28d9">
+  <div class="section-title"><span class="ico">🔖</span>今日热词<span class="sec-tag">AI总结</span></div>
+  上合麻姑峰会
+</div>
+
+<a class="to-top" href="#top" aria-label="回到顶部">↑</a>
+
+<div class="footer">陈老大专属早报 · 每日07:15自动生成 · 数据窗口2026年9月1日07:00至9月2日07:15</div>
+</body>
+</html>
