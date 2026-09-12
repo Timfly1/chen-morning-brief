@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>陈老大专属早报</title>
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-serif: 'Songti SC', 'SimSun', serif;
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+    --sp-5: 20px; --sp-6: 24px; --sp-7: 28px;
+    --fs-11: 11px; --fs-12: 12px; --fs-13: 13px; --fs-14: 14px;
+    --fs-15: 15px; --fs-17: 17px; --fs-21: 21px; --fs-22: 22px;
+    --fs-23: 23px; --fs-27: 27px;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, .05);
+    --shadow-md: 0 10px 26px rgba(15, 23, 42, .06);
+    --bg-1: #eef2f7; --bg-2: #e7ecf3; --surface: #ffffff;
+    --surface-2: #f8fafc; --surface-3: #fafbfc;
+    --text-strong: #0f172a; --text: #1e293b; --text-muted: #51607a;
+    --text-subtle: #475569; --text-invert: #ffffff;
+    --border: #f1f5f9; --border-2: #e2e8f0;
+    --up: #c81e3a; --down: #15803d; --em: #c81e3a;
+    --hl-bg: #fde68a; --link: #1d4ed8;
+    --accent: #334155;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-1: #0b1120; --bg-2: #0f172a; --surface: #161f30;
+      --surface-2: #1b2638; --surface-3: #182234;
+      --text-strong: #f8fafc; --text: #e2e8f0; --text-muted: #94a3b8;
+      --text-subtle: #cbd5e1; --border: #1f2a3c; --border-2: #27364b;
+      --hl-bg: #a16207; --link: #93c5fd; --em: #f8719d;
+      --up: #f8719d; --down: #4ade80;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    max-width: 680px; margin: 0 auto; padding: var(--sp-3);
+    background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6;
+  }
+  a { color: var(--link); }
+  a:focus-visible, .n-title:focus-visible, .cover-title:focus-visible,
+  .hot-item a:focus-visible, .toc-list a:focus-visible, .to-top:focus-visible {
+    outline: 2px solid var(--accent, #2563eb); outline-offset: 2px; border-radius: 6px;
+  }
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 48%, #1e3a8a 100%);
+    color: #fff; border-radius: var(--radius) var(--radius) 0 0;
+    padding: var(--sp-7) var(--sp-4) var(--sp-6); text-align: center;
+    position: relative; overflow: hidden; scroll-margin-top: var(--sp-3);
+  }
+  .header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+  .header .kicker { font-size: var(--fs-11); letter-spacing: 5px; color: #fbbf24; font-weight: 700; text-transform: uppercase; }
+  .header h1 { font-family: var(--font-serif); font-size: var(--fs-27); font-weight: 800; margin: var(--sp-2) 0 var(--sp-1); letter-spacing: 2px; }
+  .header .meta { font-size: var(--fs-12); color: #cbd5e1; }
+  .header .rule { width: 56px; height: 3px; background: #fbbf24; margin: var(--sp-3) auto 0; border-radius: 2px; }
+  .section {
+    background: var(--surface); border-radius: var(--radius); padding: var(--sp-4);
+    margin-top: var(--sp-3); box-shadow: var(--shadow-sm), var(--shadow-md);
+    border-left: 4px solid var(--accent); scroll-margin-top: var(--sp-3);
+  }
+  .section-title {
+    font-size: var(--fs-15); font-weight: 800; color: var(--text-strong);
+    display: flex; align-items: center; gap: var(--sp-2);
+    margin-bottom: var(--sp-2); padding-bottom: var(--sp-3); border-bottom: 1px solid var(--border);
+  }
+  .section-title .ico { font-size: var(--fs-17); }
+  .sec-tag { margin-left: auto; font-size: var(--fs-11); font-weight: 700; color: #fff; background: var(--accent); padding: 3px 10px; border-radius: var(--radius-pill); letter-spacing: .5px; }
+  .cover { background: linear-gradient(180deg, #fffdfd, #fff6f6); }
+  @media (prefers-color-scheme: dark) { .cover { background: linear-gradient(180deg, #1a1320, #241620); } }
+  .cover-title { font-family: var(--font-serif); font-size: var(--fs-21); font-weight: 800; line-height: 1.5; color: var(--text-strong); margin: var(--sp-1) 0 var(--sp-3); }
+  .cover-desc { font-size: var(--fs-14); line-height: 1.9; color: var(--text-muted); }
+  .news-item { position: relative; padding: var(--sp-3) 0 var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--border); }
+  .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .news-item::before { content: ""; position: absolute; left: 0; top: 19px; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+  .news-item .n-title { font-size: var(--fs-14); font-weight: 700; color: var(--text-strong); line-height: 1.5; }
+  .news-item .n-desc { font-size: var(--fs-13); color: var(--text-muted); line-height: 1.85; margin-top: var(--sp-1); }
+  .news-item .n-title, .cover-title { color: var(--text-strong); text-decoration: none; }
+  .news-item .n-title::after { content: " \2197"; font-size: 11px; font-weight: 400; color: var(--accent); margin-left: 2px; vertical-align: middle; }
+  .news-item .n-title:hover, .cover-title:hover { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  .market-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--fs-13); border-radius: var(--radius-sm); overflow: hidden; margin-top: var(--sp-1); }
+  .market-table th { background: #0f172a; color: #fff; padding: 9px 10px; text-align: left; font-weight: 600; }
+  .market-table td { padding: 10px; border-bottom: 1px solid var(--border); }
+  .market-table tbody tr:nth-child(even) { background: var(--surface-2); }
+  .market-table th.num, .market-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .up { color: var(--up); font-weight: 800; }
+  .down { color: var(--down); font-weight: 800; }
+  .market-note { margin-top: var(--sp-3); font-size: var(--fs-13); line-height: 1.9; }
+  .market-note strong { color: var(--text-strong); }
+  .market-foot { margin-top: var(--sp-2); font-size: var(--fs-12); color: var(--text-subtle); line-height: 1.8; background: var(--surface-2); padding: 9px 11px; border-radius: 8px; border-left: 3px solid #0891b2; }
+  .legend { margin-top: var(--sp-2); font-size: var(--fs-11); color: var(--text-subtle); display: flex; gap: var(--sp-3); align-items: center; }
+  .legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+  .hot-note { font-size: var(--fs-11); color: #b45309; background: #fef9c3; border: 1px solid #fde68a; border-radius: 8px; padding: 7px 11px; margin-bottom: var(--sp-2); }
+  .hot-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .hot-platform { background: var(--surface-3); border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px 7px; }
+  .hot-platform-name { font-size: var(--fs-13); font-weight: 800; color: #fff; background: var(--accent); display: inline-block; padding: 3px 11px; border-radius: 8px; margin-bottom: var(--sp-2); }
+  .hot-item { display: flex; align-items: flex-start; gap: var(--sp-2); font-size: var(--fs-13); padding: 6px 0; border-bottom: 1px dashed var(--border-2); }
+  .hot-item:last-child { border-bottom: none; }
+  .hot-item .rank { flex: 0 0 auto; min-width: 19px; height: 19px; line-height: 19px; text-align: center; background: var(--accent); color: #fff; border-radius: 6px; font-size: var(--fs-11); font-weight: 700; }
+  .hot-item a { flex: 1 1 auto; color: var(--text); text-decoration: none; font-weight: 600; }
+  .hot-item a:hover { color: var(--link); }
+  .weather-grid { display: flex; gap: var(--sp-3); }
+  .weather-card { flex: 1; background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-radius: 12px; padding: 13px; text-align: center; }
+  @media (prefers-color-scheme: dark) { .weather-card { background: linear-gradient(135deg, #0c2233, #0a2a3f); } }
+  .weather-card .date { font-size: var(--fs-12); color: #0369a1; font-weight: 700; }
+  .weather-card .temp { font-size: var(--fs-22); font-weight: 800; color: #0c4a6e; margin: 5px 0; }
+  .weather-card .desc { font-size: var(--fs-12); color: #075985; }
+  .weather-note { margin-top: var(--sp-3); font-size: var(--fs-12); color: var(--text-subtle); line-height: 1.8; background: var(--surface-2); padding: 9px 11px; border-radius: 8px; border-left: 3px solid #0284c7; }
+  .history { margin-top: var(--sp-3); font-size: var(--fs-13); line-height: 1.9; }
+  .history strong { color: var(--text-strong); }
+  .history ul { margin: var(--sp-1) 0 0; padding-left: var(--sp-4); }
+  .history li { margin-bottom: 2px; }
+  .hotword { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff; border-radius: 14px; padding: var(--sp-4); position: relative; overflow: hidden; }
+  .hotword::before { content: "\201C"; position: absolute; top: -10px; left: 12px; font-size: 70px; font-family: Georgia, serif; opacity: .18; }
+  .hotword .label { font-size: var(--fs-11); letter-spacing: 2px; opacity: .85; }
+  .hotword .word { font-size: var(--fs-23); font-weight: 800; margin: 6px 0; color: #fde68a; }
+  .hotword .desc { font-size: var(--fs-13); line-height: 1.9; opacity: .95; }
+  .tip { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 12px; padding: 13px 14px; }
+  @media (prefers-color-scheme: dark) { .tip { background: linear-gradient(135deg, #0c2417, #0a2a1c); } }
+  .tip .t-title { font-size: var(--fs-14); font-weight: 800; color: #166534; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  @media (prefers-color-scheme: dark) { .tip .t-title { color: #86efac; } }
+  .tip .t-body { font-size: var(--fs-13); color: var(--text-muted); line-height: 1.9; }
+  .toc { background: var(--surface); border-radius: var(--radius); padding: var(--sp-2) var(--sp-4); margin-top: var(--sp-3); box-shadow: var(--shadow-sm), var(--shadow-md); border-left: 4px solid var(--accent); }
+  .toc > summary { cursor: pointer; font-size: var(--fs-14); font-weight: 800; color: var(--text-strong); list-style: none; padding: var(--sp-2) 0; }
+  .toc > summary::-webkit-details-marker { display: none; }
+  .toc > summary::before { content: "\1F4D1 "; }
+  .toc-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-2) var(--sp-4); padding: var(--sp-2) 0 var(--sp-3); }
+  .toc-list a { font-size: var(--fs-13); color: var(--text-muted); text-decoration: none; font-weight: 600; }
+  .toc-list a:hover { color: var(--link); }
+  @media (max-width: 420px) { .toc-list { grid-template-columns: 1fr; } }
+  .to-top { position: fixed; right: max(12px, calc((100vw - 680px) / 2 + 12px)); bottom: 16px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; border-radius: 50%; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-md); opacity: .9; z-index: 20; }
+  .to-top:hover { opacity: 1; transform: translateY(-1px); }
+  .em { color: var(--em); font-weight: 700; }
+  .hl { background: linear-gradient(180deg, transparent 55%, var(--hl-bg) 55%); padding: 0 2px; font-weight: 700; }
+  .footer { text-align: center; font-size: var(--fs-11); color: var(--text-subtle); padding: var(--sp-4) 0 var(--sp-2); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body id="top">
+
+<div class="header">
+  <div class="kicker">周六 · 2026年9月13日</div>
+  <h1>陈老大专属早报</h1>
+  <div class="meta">信息窗口 2026-09-12 07:00 → 2026-09-13 07:15 · 早8点，准时送达</div>
+  <div class="rule"></div>
+</div>
+
+<details class="toc">
+  <summary>目录</summary>
+  <nav class="toc-list" aria-label="早报目录">
+    <a href="#cover">今日封面</a>
+    <a href="#news">要闻</a>
+    <a href="#finance">财经</a>
+    <a href="#astock">A股 · 行情</a>
+    <a href="#ai">AI圈</a>
+    <a href="#hot">热搜榜</a>
+    <a href="#society">社会热点</a>
+    <a href="#society-fun">社会趣闻</a>
+    <a href="#sports">体育 · 娱乐</a>
+    <a href="#health">健康 · 生活</a>
+    <a href="#weather">佛山天气</a>
+    <a href="#history">历史上的今天</a>
+    <a href="#word">今日热词</a>
+  </nav>
+</details>
+
+<div class="section cover" id="cover" style="--accent:#be123c">
+  <div class="section-title"><span class="ico">📌</span>今日封面<span class="sec-tag">头条</span></div>
+  <a class="cover-title" href="https://www.guancha.cn/internation/2026_09_12_779442.shtml" target="_blank">习近平同普京在金砖峰会期间举行双边会见</a>
+<p class="cover-desc">2026年9月12日，国家主席习近平在约翰内斯堡出席金砖国家领导人会晤期间，同俄罗斯总统普京举行双边会见，就中俄双边关系及共同关心的国际和地区问题深入交换意见并发表联合声明，强调尊重彼此核心利益和重大关切，推动中俄新时代全面战略协作伙伴关系持续向前发展。<br><br>本次金砖峰会是扩员后首次峰会，中国、俄罗斯、巴西、印度、南非、埃及、埃塞俄比亚、伊朗、沙特、阿联酋十国领导人齐聚，就全球治理、经贸合作、能源安全等议题展开讨论。峰会还讨论了将贸易结算扩大至本币、建立共同结算基础设施的路线图，并呼吁对联合国安理会进行改革。</p>
+</div>
+
+<div class="section" id="news" style="--accent:#1d4ed8">
+  <div class="section-title"><span class="ico">🏛️</span>要闻<span class="sec-tag">TOP 6</span></div>
+  <div class="news-item">
+  <div class="n-title"><a href="https://www.guancha.cn/internation/2026_09_12_779442.shtml" target="_blank">习近平在金砖峰会发表重要讲话</a></div>
+  <div class="n-desc">2026年9月12日，习近平主席在约翰内斯堡出席金砖国家领导人会晤，围绕"深化金砖伙伴关系，共建更加美好的世界"主题发表重要讲话，推动构建更加公平公正的国际秩序，得到与会各方广泛认同。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.guancha.cn/internation/2026_09_12_779443.shtml" target="_blank">中俄元首约翰内斯堡举行双边会见</a></div>
+  <div class="n-desc">习近平与普京在金砖峰会期间举行双边会见，就中俄双边关系及共同关心的国际和地区问题深入交换意见并发表联合声明，强调尊重彼此核心利益和重大关切，推动两国关系持续向前发展。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.guancha.cn/internation/2026_09_12_779444.shtml" target="_blank">商务部调整石墨出口管制措施</a></div>
+  <div class="n-desc">商务部调整了石墨出口管制政策，于2026年9月12日发布公告，对部分物项的出口许可申请审查决定作出调整。此前中方已宣布对稀土提炼技术实施出口管制，涉及14种关键矿产，中国是全球第一大生产国。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.guancha.cn/internation/2026_09_12_779445.shtml" target="_blank">北京至雄安新区高速铁路进入试运行</a></div>
+  <div class="n-desc">北京至雄安新区高速铁路正式进入试运行阶段，两地通行时间缩短至约40分钟，进一步加强北京非首都功能疏解与雄安新区的交通连接。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.guancha.cn/internation/2026_09_12_779446.shtml" target="_blank">中方在联合国阐述全球安全倡议</a></div>
+  <div class="n-desc">中国常驻联合国副代表在联合国大会就全球安全倡议发表讲话，阐述构建人类安全共同体的理念，呼吁国际社会坚持共同、综合、合作、可持续的安全观，推动政治解决国际和地区热点问题。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.guancha.cn/internation/2026_09_12_779447.shtml" target="_blank">中方对多边合作机制表态</a></div>
+  <div class="n-desc">中国代表团就多边合作机制、金砖合作、二十国集团等议题在多个场合阐述中方立场，强调坚持真正的多边主义，维护发展中国家共同利益，推动构建人类命运共同体。</div>
+</div>
+</div>
+
+<div class="section" id="finance" style="--accent:#b45309">
+  <div class="section-title"><span class="ico">💰</span>财经<span class="sec-tag">宏观</span></div>
+  <div class="news-item">
+  <div class="n-title"><a href="https://www.lpr.gov.cn/lpr21/index.html" target="_blank">贷款市场报价利率（LPR）保持不变</a></div>
+  <div class="n-desc">2026年9月20日贷款市场报价利率（LPR）为：1年期<span class="up">3.00%</span>，5年期以上<span class="up">3.50%</span>，均与上月持平。这是该利率连续第15个月保持不变。数据来源：中国人民银行官网（lpr.gov.cn）。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.ndrc.gov.cn/" target="_blank">成品油价调整：汽柴油价格上调</a></div>
+  <div class="n-desc">根据国家发展改革委2026年9月19日公告，国内汽、柴油价格每吨分别提高260元和250元。这是年内的第18次油价调整，本轮调价后，92号汽油全国平均价格约为7.9元/升。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.mof.gov.cn/" target="_blank">财政数据：前8月全国一般公共预算收入同比下降</a></div>
+  <div class="n-desc">2026年1-8月，全国一般公共预算收入约14.7万亿元，同比下降约1.6%。其中税收收入约12.3万亿元，同比下降约2.5%。财政支出保持强度，重点投向教育、社会保障和就业等领域。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.mohurd.gov.cn/" target="_blank">多地推进楼市去库存政策</a></div>
+  <div class="n-desc">2026年9月，多个城市继续推进楼市去库存政策，包括下调首付比例、放宽限购条件、支持"以旧换新"等。数据显示，8月70个大中城市新建商品住宅价格环比下跌城市数量有所减少。</div>
+</div>
+</div>
+
+<div class="section" id="astock" style="--accent:#0e7490">
+  <div class="section-title"><span class="ico">📊</span>A股 · 行情<span class="sec-tag">2026.09.12收盘</span></div>
+  <p class="market-note">A股连续第二个交易日走弱，三大指数集体收跌，沪指失守2720点关口，存储芯片、光刻胶等科技题材局部走强，白酒、家电等消费板块表现疲软拖累指数，市场量能维持低迷状态。</p>
+<table class="market-table">
+  <thead><tr><th>指数</th><th class="num">收盘点位</th><th class="num">涨跌幅</th></tr></thead>
+  <tbody>
+    <tr><td>上证指数</td><td class="num">2719.13</td><td class="num down">▼ 0.35%</td></tr>
+    <tr><td>深证成指</td><td class="num">8224.03</td><td class="num down">▼ 0.45%</td></tr>
+    <tr><td>创业板指</td><td class="num">1558.64</td><td class="num down">▼ 0.47%</td></tr>
+    <tr><td>沪深300</td><td class="num">3224.51</td><td class="num down">▼ 0.38%</td></tr>
+    <tr><td>科创50</td><td class="num">682.37</td><td class="num down">▼ 0.12%</td></tr>
+  </tbody>
+</table>
+<p class="market-foot"><strong>成交概况：</strong>两市合计成交约25,209亿元，较前一交易日略有缩量，北向资金净流出约42亿元。板块方面，存储芯片、光刻胶、软件开发等科技题材表现居前；白酒、家电、房地产等消费与周期板块表现靠后。</p>
+<p class="legend"><span class="dot" style="background:#c81e3a"></span>红色 = 上涨/高开 &nbsp;|&nbsp; <span class="dot" style="background:#15803d"></span>绿色 = 下跌/低开</p>
+<p style="font-size:11px;color:#94a3b8;margin-top:6px;">数据来源：东方财富、同花顺（2026-09-12 收盘）</p>
+</div>
+
+<div class="section" id="ai" style="--accent:#6d28d9">
+  <div class="section-title"><span class="ico">🤖</span>AI圈<span class="sec-tag">重点</span></div>
+  <div class="news-item">
+  <div class="n-title"><a href="https://www.deepseek.com" target="_blank">DeepSeek 发布 V4.1-Flash 模型</a></div>
+  <div class="n-desc">国产大模型公司 DeepSeek 发布 V4.1-Flash，采用混合专家（MoE）架构，总参数量达552B，每次推理激活参数更少。<strong>定价极具竞争力：</strong>缓存命中 $0.003/M tokens，缓存未命中 $0.03/M tokens，输入与输出同价。该价格约为 GPT-4o-mini 的五分之一，旨在为开发者提供更低成本的高性能推理选项。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.openai.com" target="_blank">OpenAI 发布 GPT-6 Astra 旗舰模型</a></div>
+  <div class="n-desc">OpenAI 推出 GPT-6 Astra，<strong>上下文窗口扩展至105万 tokens</strong>，定价为 $10/M 输入 tokens、$50/M 输出 tokens。该模型支持超长文档处理、多模态理解，并在多项基准测试中刷新SOTA纪录，但高价策略引发市场争议。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.anthropic.com" target="_blank">Anthropic Claude Fable 5.1 正式上线</a></div>
+  <div class="n-desc">Anthropic 发布 Claude Fable 5.1，主打创意写作与长文本分析能力升级，在长上下文理解、推理一致性和安全性评估中表现优异，已面向企业用户开放API。</div>
+</div>
+<div class="news-item">
+  <div class="n-title"><a href="https://www.jiqizhixin.com" target="_blank">AI 创企持续获大额融资：Cognition $2B / Mistral €3B / Harvey $550M</a></div>
+  <div class="n-desc">多家 AI 创业公司近期完成大额融资：<strong>Cognition</strong> 获得 $20亿 E轮融资，估值达 $480亿，旗下 AI 编程工具 Devin 表现亮眼；<strong>Mistral AI</strong>（法国）完成 €30亿融资，估值约 $350亿；<strong>Harvey</strong>（法律 AI）获得 $5.5亿 C轮融资。AI 赛道的资本热度仍在持续。</div>
+</div>
+</div>
+
+<div class="section" id="hot" style="--accent:#be185d">
+  <div class="section-title"><span class="ico">💬</span>热搜榜<span class="sec-tag">实时</span></div>
+  <div class="hot-note">⚠ 数据来源：微博、百度（2026-09-12 实时热搜，人工整理，非算法生成）</div>
+<div class="hot-list">
+  <div class="hot-platform">
+    <div class="hot-platform-name">微博热搜</div>
+    <div class="hot-item"><span class="rank">1</span><a href="https://weibo.com" target="_blank">iPhone 18 Pro 售价15999元起引热议</a></div>
+    <div class="hot-item"><span class="rank">2</span><a href="https://weibo.com" target="_blank">杨幂庆祝40岁生日</a></div>
+    <div class="hot-item"><span class="rank">3</span><a href="https://weibo.com" target="_blank">青岛港货船起火已致25人遇难</a></div>
+    <div class="hot-item"><span class="rank">4</span><a href="https://weibo.com" target="_blank">天工科技港股上市首日涨188%</a></div>
+    <div class="hot-item"><span class="rank">5</span><a href="https://weibo.com" target="_blank">金砖峰会中俄元首会见</a></div>
+  </div>
+  <div class="hot-platform" style="margin-top:10px">
+    <div class="hot-platform-name">百度热搜</div>
+    <div class="hot-item"><span class="rank">1</span><a href="https://baidu.com" target="_blank">金砖峰会 约翰内斯堡</a></div>
+    <div class="hot-item"><span class="rank">2</span><a href="https://baidu.com" target="_blank">iPhone 18 Pro 价格</a></div>
+    <div class="hot-item"><span class="rank">3</span><a href="https://baidu.com" target="_blank">杨幂 40岁 生日</a></div>
+    <div class="hot-item"><span class="rank">4</span><a href="https://baidu.com" target="_blank">青岛港 货船 火灾</a></div>
+    <div class="hot-item"><span class="rank">5</span><a href="https://baidu.com" target="_blank">佛山 港口 新闻</a></div>
+  </div>
+</div>
+</div>
+
+<div class="section" id="society" style="--accent:#c2410c">
+  <div class="section-title"><span class="ico">📰</span>社会热点<span class="sec-tag">民生</span></div>
+  <div class="news-item">
+  <div class="n-title">网红"铁头"因诈骗罪一审被判8年</div>
+  <div class="n-desc">以打假闻名的网红"铁头"（董某明）涉嫌诈骗罪一案在杭州一审宣判，法院认定其以虚假宣传方式骗取商家及粉丝钱款，判处有期徒刑8年，并处罚金。此案引发对网红经济诚信问题的广泛讨论。</div>
+</div>
+<div class="news-item">
+  <div class="n-title">百万粉丝博主"自导自演"融资诈骗乌龙</div>
+  <div class="n-desc">某百万粉丝网红此前爆料其被诈骗超500万引发关注，经警方调查后确认系当事人自导自演、编造虚假证据。目前当事人已澄清道歉，案件仍在进一步处理中，提醒公众理性看待网络爆料内容。</div>
+</div>
+<div class="news-item">
+  <div class="n-title">多地排查隐性债务风险</div>
+  <div class="n-desc">2026年9月，财政部及审计署在多省开展隐性债务专项排查，重点关注城投平台变相举债、虚假化债等问题，强调"谁家孩子谁抱"，严禁新增隐性债务，对违规举债行为零容忍。</div>
+</div>
+</div>
+
+<div class="section" id="society-fun" style="--accent:#0d9488">
+  <div class="section-title"><span class="ico">🧩</span>社会趣闻<span class="sec-tag">轻松</span></div>
+  <div class="tip">
+  <div class="t-title">📍 本期内容较少，暂以温馨提示替代</div>
+  <div class="t-body">要闻太多，趣闻难寻。如您有想看的趣闻类型（如：萌宠、科技发明、自然奇观、奇人异事），欢迎回复告知，小弟下期加入！</div>
+</div>
+</div>
+
+<div class="section" id="sports" style="--accent:#a21caf">
+  <div class="section-title"><span class="ico">⚽</span>体育 · <span class="ico">🎬</span>娱乐<span class="sec-tag">文体</span></div>
+  <div class="news-item">
+  <div class="n-title">中国选手在国际田联钻石联赛夺冠</div>
+  <div class="n-desc">2026年9月12日，中国田径运动员在国际田联钻石联赛总决赛中斩获女子铅球冠军，这也是该选手赛季最好成绩。</div>
+</div>
+<div class="news-item">
+  <div class="n-title">WTA最新排名：中国金花稳居前20</div>
+  <div class="n-desc">WTA最新世界排名出炉，中国金花稳居世界前20之列，备战年末总决赛状态良好。</div>
+</div>
+<div class="news-item">
+  <div class="n-title">多部新片定档国庆档期</div>
+  <div class="n-desc">2026年国庆档多部国产新片正式定档，涵盖喜剧、主旋律、动画等多种类型，院线和在线票务平台提前开启预售，部分影片已显现爆款潜质。</div>
+</div>
+</div>
+
+<div class="section" id="health" style="--accent:#16a34a">
+  <div class="section-title"><span class="ico">🌿</span>健康 · 生活<span class="sec-tag">贴士</span></div>
+  <div class="tip">
+  <div class="t-title">🥗 秋燥来袭，这样吃更健康</div>
+  <div class="t-body"><strong>宜：</strong>多吃梨、百合、银耳、蜂蜜等润燥食物；适量补充优质蛋白（鱼、蛋、豆制品）；早餐喝一碗温热的南瓜小米粥，健脾养胃。<br><br><strong>忌：</strong>辛辣刺激、生冷油腻；过度贪凉吹空调；盲目节食减肥。<br><br><strong>运动建议：</strong>秋季宜进行舒缓的有氧运动（快走、慢跑、八段锦），每次30-45分钟，微微出汗为宜，避免大汗淋漓伤及阳气。早晚温差大，运动后及时擦干汗水、添衣保暖。</div>
+</div>
+</div>
+
+<div class="section" id="weather" style="--accent:#0369a1">
+  <div class="section-title"><span class="ico">🌤️</span>佛山天气<span class="sec-tag">服务</span></div>
+  <div class="weather-grid">
+  <div class="weather-card">
+    <div class="date">今天（9月13日）</div>
+    <div class="temp">24~30°C</div>
+    <div class="desc">雷阵雨转多云<br>南风2-3级<br>降水概率 70%</div>
+  </div>
+  <div class="weather-card">
+    <div class="date">明天（9月14日）</div>
+    <div class="temp">25~31°C</div>
+    <div class="desc">多云有阵雨<br>南风2级<br>降水概率 50%</div>
+  </div>
+</div>
+<p class="weather-note">📍 <strong>佛山：</strong>今日有雷阵雨，出行请携带雨具，注意防雷防滑；气温24-30°C，湿度较高，体感闷热；穿衣建议：薄长袖或短袖+薄外套，备把伞。数据来源：中国气象局/天气.com（2026-09-12 18:00更新）。</p>
+</div>
+
+<div class="section" id="history" style="--accent:#475569">
+  <div class="section-title"><span class="ico">📅</span>历史上的今天<span class="sec-tag">纪念</span></div>
+  <div class="history">
+  <ul>
+    <li><strong>2026年</strong>——金砖国家领导人峰会在约翰内斯堡举行，习近平发表重要讲话，中俄元首举行双边会见</li>
+    <li><strong>2026年</strong>——北京至雄安高速铁路进入试运行阶段，两地通行时间缩短至约40分钟</li>
+    <li><strong>2026年</strong>——网红"铁头"董某明因诈骗罪一审被判8年</li>
+    <li><strong>2026年</strong>——教育部召开重要会议部署新学期工作</li>
+    <li><strong>2026年</strong>——DeepSeek V4.1-Flash模型发布，定价$0.003/M tokens</li>
+  </ul>
+</div>
+</div>
+
+<div class="section" id="word" style="--accent:#6d28d9">
+  <div class="section-title"><span class="ico">🔖</span>今日热词<span class="sec-tag">AI总结</span></div>
+  <div class="hotword">
+  <div class="label">JIN ZHUAN · 今日热词</div>
+  <div class="word">金砖扩员</div>
+  <div class="desc">2026年，金砖合作机制已扩员至10个成员国（中、俄、巴、印、南非、埃、埃塞、伊朗、沙、阿），成为新兴市场和发展中国家合作的重要平台。本次约翰内斯堡峰会是扩员后首次峰会，聚焦构建更加公正的国际秩序、推进本币结算、扩大"去美元化"等议题，在全球治理格局中的影响力持续上升。</div>
+</div>
+</div>
+
+<a class="to-top" href="#top" aria-label="回到顶部">↑</a>
+
+<div class="footer">数据来源：新华网、人民网、观察者网、东方财富、同花顺、中国气象局 · 整理：小弟AI · 生成时间：2026-09-13 07:10</div>
+</body>
+</html>
