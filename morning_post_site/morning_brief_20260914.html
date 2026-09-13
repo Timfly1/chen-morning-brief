@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>陈老大专属早报</title>
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-serif: 'Songti SC', 'SimSun', serif;
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+    --sp-5: 20px; --sp-6: 24px; --sp-7: 28px;
+    --fs-11: 11px; --fs-12: 12px; --fs-13: 13px; --fs-14: 14px;
+    --fs-15: 15px; --fs-17: 17px; --fs-21: 21px; --fs-22: 22px;
+    --fs-23: 23px; --fs-27: 27px;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, .05);
+    --shadow-md: 0 10px 26px rgba(15, 23, 42, .06);
+    --bg-1: #eef2f7; --bg-2: #e7ecf3; --surface: #ffffff;
+    --surface-2: #f8fafc; --surface-3: #fafbfc;
+    --text-strong: #0f172a; --text: #1e293b; --text-muted: #51607a;
+    --text-subtle: #475569; --text-invert: #ffffff;
+    --border: #f1f5f9; --border-2: #e2e8f0;
+    --up: #c81e3a; --down: #15803d; --em: #c81e3a;
+    --hl-bg: #fde68a; --link: #1d4ed8;
+    --accent: #334155;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-1: #0b1120; --bg-2: #0f172a; --surface: #161f30;
+      --surface-2: #1b2638; --surface-3: #182234;
+      --text-strong: #f8fafc; --text: #e2e8f0; --text-muted: #94a3b8;
+      --text-subtle: #cbd5e1; --border: #1f2a3c; --border-2: #27364b;
+      --hl-bg: #a16207; --link: #93c5fd; --em: #f8719d;
+      --up: #f8719d; --down: #4ade80;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    max-width: 680px; margin: 0 auto; padding: var(--sp-3);
+    background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6;
+  }
+  a { color: var(--link); }
+  a:focus-visible, .n-title:focus-visible, .cover-title:focus-visible,
+  .hot-item a:focus-visible, .toc-list a:focus-visible, .to-top:focus-visible {
+    outline: 2px solid var(--accent, #2563eb); outline-offset: 2px; border-radius: 6px;
+  }
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 48%, #1e3a8a 100%);
+    color: #fff; border-radius: var(--radius) var(--radius) 0 0;
+    padding: var(--sp-7) var(--sp-4) var(--sp-6); text-align: center;
+    position: relative; overflow: hidden; scroll-margin-top: var(--sp-3);
+  }
+  .header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+  .header .kicker { font-size: var(--fs-11); letter-spacing: 5px; color: #fbbf24; font-weight: 700; text-transform: uppercase; }
+  .header h1 { font-family: var(--font-serif); font-size: var(--fs-27); font-weight: 800; margin: var(--sp-2) 0 var(--sp-1); letter-spacing: 2px; }
+  .header .meta { font-size: var(--fs-12); color: #cbd5e1; }
+  .header .rule { width: 56px; height: 3px; background: #fbbf24; margin: var(--sp-3) auto 0; border-radius: 2px; }
+  .section {
+    background: var(--surface); border-radius: var(--radius); padding: var(--sp-4);
+    margin-top: var(--sp-3); box-shadow: var(--shadow-sm), var(--shadow-md);
+    border-left: 4px solid var(--accent); scroll-margin-top: var(--sp-3);
+  }
+  .section-title {
+    font-size: var(--fs-15); font-weight: 800; color: var(--text-strong);
+    display: flex; align-items: center; gap: var(--sp-2);
+    margin-bottom: var(--sp-2); padding-bottom: var(--sp-3); border-bottom: 1px solid var(--border);
+  }
+  .section-title .ico { font-size: var(--fs-17); }
+  .sec-tag { margin-left: auto; font-size: var(--fs-11); font-weight: 700; color: #fff; background: var(--accent); padding: 3px 10px; border-radius: var(--radius-pill); letter-spacing: .5px; }
+  .cover { background: linear-gradient(180deg, #fffdfd, #fff6f6); }
+  @media (prefers-color-scheme: dark) { .cover { background: linear-gradient(180deg, #1a1320, #241620); } }
+  .cover-title { font-family: var(--font-serif); font-size: var(--fs-21); font-weight: 800; line-height: 1.5; color: var(--text-strong); margin: var(--sp-1) 0 var(--sp-3); }
+  .cover-desc { font-size: var(--fs-14); line-height: 1.9; color: var(--text-muted); }
+  .news-item { position: relative; padding: var(--sp-3) 0 var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--border); }
+  .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .news-item::before { content: ""; position: absolute; left: 0; top: 19px; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+  .news-item .n-title { font-size: var(--fs-14); font-weight: 700; color: var(--text-strong); line-height: 1.5; }
+  .news-item .n-desc { font-size: var(--fs-13); color: var(--text-muted); line-height: 1.85; margin-top: var(--sp-1); }
+  .news-item .n-title, .cover-title { color: var(--text-strong); text-decoration: none; }
+  .news-item .n-title::after { content: " \2197"; font-size: 11px; font-weight: 400; color: var(--accent); margin-left: 2px; vertical-align: middle; }
+  .news-item .n-title:hover, .cover-title:hover { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  .market-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--fs-13); border-radius: var(--radius-sm); overflow: hidden; margin-top: var(--sp-1); }
+  .market-table th { background: #0f172a; color: #fff; padding: 9px 10px; text-align: left; font-weight: 600; }
+  .market-table td { padding: 10px; border-bottom: 1px solid var(--border); }
+  .market-table tbody tr:nth-child(even) { background: var(--surface-2); }
+  .market-table th.num, .market-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .up { color: var(--up); font-weight: 800; }
+  .down { color: var(--down); font-weight: 800; }
+  .market-note { margin-top: var(--sp-3); font-size: var(--fs-13); line-height: 1.9; }
+  .market-note strong { color: var(--text-strong); }
+  .market-foot { margin-top: var(--sp-2); font-size: var(--fs-12); color: var(--text-subtle); line-height: 1.8; background: var(--surface-2); padding: 9px 11px; border-radius: 8px; border-left: 3px solid #0891b2; }
+  .legend { margin-top: var(--sp-2); font-size: var(--fs-11); color: var(--text-subtle); display: flex; gap: var(--sp-3); align-items: center; }
+  .legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+  .hot-note { font-size: var(--fs-11); color: #b45309; background: #fef9c3; border: 1px solid #fde68a; border-radius: 8px; padding: 7px 11px; margin-bottom: var(--sp-2); }
+  .hot-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .hot-platform { background: var(--surface-3); border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px 7px; }
+  .hot-platform-name { font-size: var(--fs-13); font-weight: 800; color: #fff; background: var(--accent); display: inline-block; padding: 3px 11px; border-radius: 8px; margin-bottom: var(--sp-2); }
+  .hot-item { display: flex; align-items: flex-start; gap: var(--sp-2); font-size: var(--fs-13); padding: 6px 0; border-bottom: 1px dashed var(--border-2); }
+  .hot-item:last-child { border-bottom: none; }
+  .hot-item .rank { flex: 0 0 auto; min-width: 19px; height: 19px; line-height: 19px; text-align: center; background: var(--accent); color: #fff; border-radius: 6px; font-size: var(--fs-11); font-weight: 700; }
+  .hot-item a { flex: 1 1 auto; color: var(--text); text-decoration: none; font-weight: 600; }
+  .hot-item a:hover { color: var(--link); }
+  .weather-grid { display: flex; gap: var(--sp-3); }
+  .weather-card { flex: 1; background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-radius: 12px; padding: 13px; text-align: center; }
+  @media (prefers-color-scheme: dark) { .weather-card { background: linear-gradient(135deg, #0c2233, #0a2a3f); } }
+  .weather-card .date { font-size: var(--fs-12); color: #0369a1; font-weight: 700; }
+  .weather-card .temp { font-size: var(--fs-22); font-weight: 800; color: #0c4a6e; margin: 5px 0; }
+  .weather-card .desc { font-size: var(--fs-12); color: #075985; }
+  .weather-note { margin-top: var(--sp-3); font-size: var(--fs-12); color: var(--text-subtle); line-height: 1.8; background: var(--surface-2); padding: 9px 11px; border-radius: 8px; border-left: 3px solid #0284c7; }
+  .history { margin-top: var(--sp-3); font-size: var(--fs-13); line-height: 1.9; }
+  .history strong { color: var(--text-strong); }
+  .history ul { margin: var(--sp-1) 0 0; padding-left: var(--sp-4); }
+  .history li { margin-bottom: 2px; }
+  .hotword { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff; border-radius: 14px; padding: var(--sp-4); position: relative; overflow: hidden; }
+  .hotword::before { content: "\201C"; position: absolute; top: -10px; left: 12px; font-size: 70px; font-family: Georgia, serif; opacity: .18; }
+  .hotword .label { font-size: var(--fs-11); letter-spacing: 2px; opacity: .85; }
+  .hotword .word { font-size: var(--fs-23); font-weight: 800; margin: 6px 0; color: #fde68a; }
+  .hotword .desc { font-size: var(--fs-13); line-height: 1.9; opacity: .95; }
+  .tip { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 12px; padding: 13px 14px; }
+  @media (prefers-color-scheme: dark) { .tip { background: linear-gradient(135deg, #0c2417, #0a2a1c); } }
+  .tip .t-title { font-size: var(--fs-14); font-weight: 800; color: #166534; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  @media (prefers-color-scheme: dark) { .tip .t-title { color: #86efac; } }
+  .tip .t-body { font-size: var(--fs-13); color: var(--text-muted); line-height: 1.9; }
+  .toc { background: var(--surface); border-radius: var(--radius); padding: var(--sp-2) var(--sp-4); margin-top: var(--sp-3); box-shadow: var(--shadow-sm), var(--shadow-md); border-left: 4px solid var(--accent); }
+  .toc > summary { cursor: pointer; font-size: var(--fs-14); font-weight: 800; color: var(--text-strong); list-style: none; padding: var(--sp-2) 0; }
+  .toc > summary::-webkit-details-marker { display: none; }
+  .toc > summary::before { content: "\1F4D1 "; }
+  .toc-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-2) var(--sp-4); padding: var(--sp-2) 0 var(--sp-3); }
+  .toc-list a { font-size: var(--fs-13); color: var(--text-muted); text-decoration: none; font-weight: 600; }
+  .toc-list a:hover { color: var(--link); }
+  @media (max-width: 420px) { .toc-list { grid-template-columns: 1fr; } }
+  .to-top { position: fixed; right: max(12px, calc((100vw - 680px) / 2 + 12px)); bottom: 16px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; border-radius: 50%; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-md); opacity: .9; z-index: 20; }
+  .to-top:hover { opacity: 1; transform: translateY(-1px); }
+  .em { color: var(--em); font-weight: 700; }
+  .hl { background: linear-gradient(180deg, transparent 55%, var(--hl-bg) 55%); padding: 0 2px; font-weight: 700; }
+  .footer { text-align: center; font-size: var(--fs-11); color: var(--text-subtle); padding: var(--sp-4) 0 var(--sp-2); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body id="top">
+
+<div class="header">
+  <div class="kicker">2026年9月14日 · 周一 · 农历八月初四</div>
+  <h1>陈老大专属早报</h1>
+  <div class="meta">晨间推送 · 佛山 · 收录13个板块 · 数据来源：人民网/新华网/华尔街见闻/今日热榜</div>
+  <div class="rule"></div>
+</div>
+
+<details class="toc">
+  <summary>目录</summary>
+  <nav class="toc-list" aria-label="早报目录">
+    <a href="#cover">今日封面</a>
+    <a href="#news">要闻</a>
+    <a href="#finance">财经</a>
+    <a href="#astock">A股 · 行情</a>
+    <a href="#ai">AI圈</a>
+    <a href="#hot">热搜榜</a>
+    <a href="#society">社会热点</a>
+    <a href="#society-fun">社会趣闻</a>
+    <a href="#sports">体育 · 娱乐</a>
+    <a href="#health">健康 · 生活</a>
+    <a href="#weather">佛山天气</a>
+    <a href="#history">历史上的今天</a>
+    <a href="#word">今日热词</a>
+  </nav>
+</details>
+
+<div class="section cover" id="cover" style="--accent:#be123c">
+  <div class="section-title"><span class="ico">📌</span>今日封面<span class="sec-tag">头条</span></div>
+  
+  <p class="cover-title">习近平出席金砖峰会并提出五项合作倡议："大金砖"应有更大作为</p>
+  <p class="cover-desc">
+    国家主席习近平9月12日至13日在印度新德里出席金砖国家领导人第十八次会晤，就AI开源合作、贸易投资便利化、数字产业、智能制造、科技育才提出五项倡议，呼吁"大金砖"国家以开放包容、合作共赢的精神，携手推动全球南方团结自强。
+  </p>
+
+</div>
+
+<div class="section" id="news" style="--accent:#1d4ed8">
+  <div class="section-title"><span class="ico">🏛️</span>要闻<span class="sec-tag">TOP 6</span></div>
+  
+  <div class="news-item">
+    <div class="n-title"><a href="https://politics.people.com.cn/n1/2026/0914/c1024-40797886.html" target="_blank">习近平出席金砖国家领导人第十八次会晤并发表重要讲话</a></div>
+    <div class="n-desc">2026年9月13日于印度新德里，中方提出五项"大金砖合作"倡议，涵盖AI开源社区、贸易投资便利化、数字产业云平台、智能工厂工程师联盟等领域。（来源：人民网，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title"><a href="https://news.qq.com/rain/a/20260912A0258600" target="_blank">证监会集中处罚编造传播虚假税率信息案，四起案件涉百万粉丝博主</a></div>
+    <div class="n-desc">证监会近期集中查处4起编造、传播虚假税率调整信息案，对财经博主陈广华罚款20万元，对证券从业人员宗建树处5年市场禁入、马星瑞罚款30万元。（来源：腾讯新闻/华尔街见闻，2026-09-12）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title"><a href="https://www.toutiao.com/article/7684818449398235682/" target="_blank">著名主持人敬一丹9月13日在北京逝世，享年71岁</a></div>
+    <div class="n-desc">《焦点访谈》标志性主持人敬一丹，6月突发急性脑出血后住院治疗，9月13日离世。白岩松、韩乔生、鞠萍等媒体人追忆其职业生涯。（来源：光明网/北京青年报，2026-09-13）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title"><a href="https://news.qq.com/rain/a/20260912A0258600" target="_blank">证监会查处ST卓然严重财务造假，拟罚款4830万、启动强制退市</a></div>
+    <div class="n-desc">ST卓然被查出严重财务造假，证监会拟对其及责任人合计罚款4830万元，对实控人采取10年证券市场禁入，并依法启动重大违法强制退市程序。（来源：华尔街见闻，2026-09-12）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title"><a href="https://news.qq.com/rain/a/20260912A0258600" target="_blank">中央网信办等三部门联合印发《数字乡村高质量发展行动计划（2026—2030年）》</a></div>
+    <div class="n-desc">部署5方面24项工作举措，探索高通量卫星、低轨卫星互联网等方式提供多样化网络接入服务，并布局建设农村公共充电基础设施，支持新能源汽车、智能家电下乡。（来源：腾讯新闻，2026-09-12）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title"><a href="https://news.qq.com/rain/a/20260912A0258600" target="_blank">沙特石油管道遭袭关闭，多家券商收紧个人程序化交易接入</a></div>
+    <div class="n-desc">沙特东西输油管道利雅得及麦地那段9月10日多次遭袭，已采取预防性关闭措施。同时，多家券商正在清理个人投资者程序化交易存量违规接入业务。（来源：华尔街见闻早餐，2026-09-12）</div>
+  </div>
+
+</div>
+
+<div class="section" id="finance" style="--accent:#b45309">
+  <div class="section-title"><span class="ico">💰</span>财经<span class="sec-tag">宏观</span></div>
+  
+  <div class="news-item">
+    <div class="n-title">A股上周五全线收跌，沪深成交1.97万亿元</div>
+    <div class="n-desc">上周五（9月12日）A股低位运行，上证指数跌1.18%报3888.11点，深证成指跌1.08%报13471.26点，创业板指跌0.49%报3322.04点，万得全A跌1.42%，大市成交1.99万亿元（约1.97万亿）；燧原科技上市首日大涨179%。</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">港股五连跌，恒生指数跌0.60%</div>
+    <div class="n-desc">恒生指数收跌0.60%报24805.63点，恒生科技指数跌0.23%报4320.57点，恒生中国企业指数跌0.34%，三大指数均连跌五日。地产、石化、半导体、有色金属板块领跌，南向资金净买入44.31亿港元。</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">美股终结四连跌：标普涨0.86%，道指涨0.98%</div>
+    <div class="n-desc">上周五（9月12日）美股收涨，标普500涨0.86%报7656.98点，道指涨0.98%报52573.29点，纳指涨0.96%报26333.04点，三大指数终结四连跌。AI服务器链走强，戴尔涨12%创纪录新高。本周标普累跌0.8%，纳指累跌0.7%。</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">原油大跌约2%，黄金守住4300美元</div>
+    <div class="n-desc">WTI原油10月合约跌2.00%报100.44美元，布伦特11月合约跌近3%报104.61美元，自四个多月高位回落（本周仍累涨约9%）。COMEX黄金期货涨0.04%报4408.90美元，现货黄金守住4300美元关口报4349.06美元。</div>
+  </div>
+
+</div>
+
+<div class="section" id="astock" style="--accent:#0e7490">
+  <div class="section-title"><span class="ico">📊</span>A股 · 行情<span class="sec-tag">上周五收盘</span></div>
+  
+  <table class="market-table">
+    <thead>
+      <tr>
+        <th>指数</th><th class="num">最新点位</th><th class="num">涨跌幅</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>上证指数</td><td class="num">3888.11</td><td class="num down">-1.18%</td></tr>
+      <tr><td>深证成指</td><td class="num">13471.26</td><td class="num down">-1.08%</td></tr>
+      <tr><td>创业板指</td><td class="num">3322.04</td><td class="num down">-0.49%</td></tr>
+      <tr><td>沪深300</td><td class="num">收盘1.97万亿</td><td class="num down">成交额</td></tr>
+      <tr><td colspan="3" style="background:#f0f9ff;font-weight:700;">美股（9/12收盘）</td></tr>
+      <tr><td>标普500</td><td class="num">7656.98</td><td class="num up">+0.86%</td></tr>
+      <tr><td>道琼斯</td><td class="num">52573.29</td><td class="num up">+0.98%</td></tr>
+      <tr><td>纳斯达克</td><td class="num">26333.04</td><td class="num up">+0.96%</td></tr>
+      <tr><td colspan="3" style="background:#f0f9ff;font-weight:700;">港股（9/12收盘）</td></tr>
+      <tr><td>恒生指数</td><td class="num">24805.63</td><td class="num down">-0.60%</td></tr>
+      <tr><td>恒生科技</td><td class="num">4320.57</td><td class="num down">-0.23%</td></tr>
+    </tbody>
+  </table>
+  <p class="market-foot"><strong>注：</strong>A股数据为上一交易日（9/12，周五）收盘，A股今日（周一）9:30开盘。美股为9月12日（周五）收盘。港股为9月12日收盘。原油价格单位为美元/桶。</p>
+
+</div>
+
+<div class="section" id="ai" style="--accent:#6d28d9">
+  <div class="section-title"><span class="ico">🤖</span>AI圈<span class="sec-tag">重点</span></div>
+  
+  <div class="news-item">
+    <div class="n-title">习近平在金砖峰会提"AI开源合作倡议"：建金砖AI开源社区</div>
+    <div class="n-desc">习近平在金砖峰会第二阶段会议上提议：建立金砖AI开源社区，支持大模型合作开发与应用，举办AI专题研讨和培训，构建开放AI生态。（来源：新华网英文版，2026-09-13）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">Anthropic CEO呼吁放缓AI迭代，马斯克、奥尔特曼回应</div>
+    <div class="n-desc">Anthropic掌门人Dario Amodei呼吁AI公司适度限速，被马斯克和OpenAI奥尔特曼分别回应。此举引发学界广泛讨论。（来源：知乎热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">DeepSeek首轮融资：梁文锋出资200亿？官方未证实</div>
+    <div class="n-desc">有传言称DeepSeek首轮融资梁文锋个人出资200亿，目前尚无官方渠道证实此消息。（来源：微博热搜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">AI时代部分高校困在2022年？吴恩达等学者批评高等教育AI脱节</div>
+    <div class="n-desc">吴恩达指出"AI时代部分高校困在2022年"，多所高校AI课程更新滞后，高校如何适应AI时代引发热议。（来源：知乎热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">OpenAI据报正开发自研AI芯片Jalapeno</div>
+    <div class="n-desc">OpenAI正加速自研芯片计划，继GPT-6 Astra发布后，进一步减少对英伟达GPU依赖；智谱AI新一轮融资估值达50亿美元。（来源：行业动态）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">书生Intern-S2开源：3970亿参数多模态模型</div>
+    <div class="n-desc">上海AI Lab发布书生Intern-S2，3970亿参数，为目前最大开源多模态模型之一，全面开源开放下载。</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">陶哲轩等菲奖得主联合抗议AI数学军备竞赛</div>
+    <div class="n-desc">陶哲轩、邓煜等多位菲尔兹奖得主联合发声，称"AI正杀死数学百年开放传统"，引发数学界与AI界激烈讨论。（来源：知乎热榜，2026-09-14）</div>
+  </div>
+
+</div>
+
+<div class="section" id="hot" style="--accent:#be185d">
+  <div class="section-title"><span class="ico">💬</span>热搜榜<span class="sec-tag">实时</span></div>
+  
+  <div class="hot-note">热搜数据来源：微博、知乎、百度（2026-09-14 上午采集）</div>
+  <div class="hot-list">
+
+    <div class="hot-platform">
+      <div class="hot-platform-name">微博</div>
+      <div class="hot-item"><span class="rank">1</span><a href="https://weibo.com/a/hot/realtime/" target="_blank">敬一丹去世</a></div>
+      <div class="hot-item"><span class="rank">2</span><a href="https://weibo.com/a/hot/realtime/" target="_blank">胖东来新员工实行四年合同制</a></div>
+      <div class="hot-item"><span class="rank">3</span><a href="https://weibo.com/a/hot/realtime/" target="_blank">菲律宾海警船撤离仙宾礁</a></div>
+      <div class="hot-item"><span class="rank">4</span><a href="https://weibo.com/a/hot/realtime/" target="_blank">台风贝碧嘉登陆</a></div>
+      <div class="hot-item"><span class="rank">5</span><a href="https://weibo.com/a/hot/realtime/" target="_blank">中秋档电影票房突破1亿</a></div>
+    </div>
+
+    <div class="hot-platform">
+      <div class="hot-platform-name">知乎</div>
+      <div class="hot-item"><span class="rank">1</span><a href="https://hot.sapi.run/#/" target="_blank">名校硕士五轮面试全过却因第一学历专科遭拒</a></div>
+      <div class="hot-item"><span class="rank">2</span><a href="https://hot.sapi.run/#/" target="_blank">Anthropic掌门人呼吁放缓AI模型迭代</a></div>
+      <div class="hot-item"><span class="rank">3</span><a href="https://hot.sapi.run/#/" target="_blank">著名主持人敬一丹去世</a></div>
+      <div class="hot-item"><span class="rank">4</span><a href="https://hot.sapi.run/#/" target="_blank">男生考上北大医学部放弃再考进北大图灵班</a></div>
+      <div class="hot-item"><span class="rank">5</span><a href="https://hot.sapi.run/#/" target="_blank">伊朗宣布对所有船只关闭霍尔木兹海峡</a></div>
+    </div>
+
+    <div class="hot-platform">
+      <div class="hot-platform-name">百度</div>
+      <div class="hot-item"><span class="rank">1</span><a href="https://s.weibo.com/top/summary" target="_blank">中缅胞波情谊深厚</a></div>
+      <div class="hot-item"><span class="rank">2</span><a href="https://s.weibo.com/top/summary" target="_blank">为什么金砖国家合作对全球发展举足轻重</a></div>
+      <div class="hot-item"><span class="rank">3</span><a href="https://s.weibo.com/top/summary" target="_blank">SpaceX大涨</a></div>
+      <div class="hot-item"><span class="rank">4</span><a href="https://s.weibo.com/top/summary" target="_blank">DeepSeek首轮融资梁文锋出资200亿</a></div>
+      <div class="hot-item"><span class="rank">5</span><a href="https://s.weibo.com/top/summary" target="_blank">AI时代的稀缺能力</a></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="section" id="society" style="--accent:#c2410c">
+  <div class="section-title"><span class="ico">📰</span>社会热点<span class="sec-tag">民生</span></div>
+  
+  <div class="news-item">
+    <div class="n-title">菲律宾海警船撤离中国仙宾礁</div>
+    <div class="n-desc">9月14日，菲律宾海警船（9701号船）在仙宾礁非法滞留数月、多次运补失败后撤离。中国外交部发言人表示，中方要求菲方停止侵权挑衅。（来源：央视新闻/玉渊谭天，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">胖东来新员工实行四年合同制，引发讨论</div>
+    <div class="n-desc">胖东来宣布对新入职员工实行四年合同制，规定合同期满后根据表现决定是否续签，相关话题在微博引发热议。（来源：今日热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">男子考上北大医学部放弃，2026年再考进北大图灵班</div>
+    <div class="n-desc">一名男生去年被北大医学部录取后选择复读，今年成功考入北大图灵班，引发关于人生选择和沉没成本的讨论。（来源：微博/知乎热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">证监会集中处罚编造虚假税率信息：百万粉丝博主被罚20万</div>
+    <div class="n-desc">除财经博主陈广华被罚款外，另有两名证券从业人员分别被罚款30万元和处以5年市场禁入。（来源：腾讯新闻，2026-09-12）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">多家券商收紧程序化交易接入，存量违规接入业务清理中</div>
+    <div class="n-desc">多家券商正在清理个人投资者依托反采策略对接券商系统的存量违规接入业务，程序化交易监管持续收紧。（来源：华尔街见闻，2026-09-12）</div>
+  </div>
+
+</div>
+
+<div class="section" id="society-fun" style="--accent:#0d9488">
+  <div class="section-title"><span class="ico">🧩</span>社会趣闻<span class="sec-tag">轻松</span></div>
+  
+  <div class="news-item">
+    <div class="n-title">小男孩在幼儿园坦然展示假肢，感动网友</div>
+    <div class="n-desc">一段视频中，小男孩在幼儿园向同学坦然展示自己的假肢，从容自信，引发网友广泛点赞。（来源：微博热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">女子花25万成功克隆去世宠物狗</div>
+    <div class="n-desc">一位女士花费约25万元成功克隆了去世的宠物狗，新生犬与原犬高度相似，相关话题在微博引发热议。（来源：微博热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">58岁自驾阿姨苏敏决定离婚</div>
+    <div class="n-desc">因自驾旅行走红网络的58岁阿姨苏敏，决定与丈夫离婚，引发关于中老年婚姻自由的讨论。（来源：微博热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">男子袭胸女孩称"离婚久了有点冲动"</div>
+    <div class="n-desc">一男子对女孩实施骚扰后竟辩称"离婚久了有点冲动"，引发舆论强烈谴责，案件正在依法处理中。（来源：微博热榜，2026-09-14）</div>
+  </div>
+
+</div>
+
+<div class="section" id="sports" style="--accent:#a21caf">
+  <div class="section-title"><span class="ico">⚽</span>体育 · <span class="ico">🎬</span>娱乐<span class="sec-tag">文体</span></div>
+  
+  <div class="news-item">
+    <div class="n-title">世预赛亚洲区18强赛：澳大利亚2-0印尼，日本5-0巴林</div>
+    <div class="n-desc">昨晚（9月13日），澳大利亚主场2-0击败印度尼西亚，日本客场5-0大胜巴林，两队同取两连胜。中国男足首轮1-0击败日本后，今晚将客场挑战沙特。（来源：综合报道）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">王楚钦WTT中国大满贯无缘男单决赛</div>
+    <div class="n-desc">在昨晚进行的WTT中国大满贯比赛中，王楚钦止步四强，无缘男单决赛。孙颖莎则在女单半决赛中与王艺迪展开激烈争夺。（来源：微博热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">LCK总决赛：GENG击败T1蝉联总冠军</div>
+    <div class="n-desc">GEN.G在LCK总决赛中击败T1，成功蝉联联赛冠军，Ruler获得总决赛MVP。（来源：B站/微博热榜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">拼多多市值超越阿里巴巴</div>
+    <div class="n-desc">在巴西、俄罗斯禁投中国应用等消息影响下，拼多多市值近期大幅上涨，已超越阿里巴巴，成为电商新龙头。（来源：综合动态）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">SpaceX大涨</div>
+    <div class="n-desc">SpaceX相关业务持续高速增长，估值大幅提升，在资本市场引发广泛关注。（来源：微博热搜，2026-09-14）</div>
+  </div>
+  <div class="news-item">
+    <div class="n-title">中秋档电影票房突破1亿</div>
+    <div class="n-desc">据灯塔专业版数据，截至9月14日中午，2026年中秋档票房已突破1亿元。（来源：微博热榜，2026-09-14）</div>
+  </div>
+
+</div>
+
+<div class="section" id="health" style="--accent:#16a34a">
+  <div class="section-title"><span class="ico">🌿</span>健康 · 生活<span class="sec-tag">贴士</span></div>
+  
+  <div class="tip">
+    <div class="t-title">🌿 2026全民健康文明生活方式宣传月</div>
+    <div class="t-body">
+      宣传主题：<strong>"主动健康 自我管理"</strong>。<br>
+      <strong>三减三健</strong>：减盐、减油、减糖；健康口腔、健康体重、健康骨骼。<br><br>
+      <strong>秋季养生建议：</strong><br>
+      ① 饮食：多吃梨、百合、银耳等润燥食物，少吃辛辣；适当补充优质蛋白<br>
+      ② 运动：早晚温差大，宜选择快走、太极拳、瑜伽等温和运动，避免大汗淋漓<br>
+      ③ 睡眠：早睡早起，保证7-8小时睡眠，午休20-30分钟为宜<br>
+      ④ 情绪：秋燥易引发情绪波动，可通过冥想、阅读、社交保持心情舒畅
+    </div>
+  </div>
+
+</div>
+
+<div class="section" id="weather" style="--accent:#0369a1">
+  <div class="section-title"><span class="ico">🌤️</span>佛山天气<span class="sec-tag">服务</span></div>
+  
+  <div class="weather-grid">
+    <div class="weather-card">
+      <div class="date">今天 09/14（周一）</div>
+      <div class="temp">24~31°C</div>
+      <div class="desc">阴天间多云<br>有中雷雨，局部大雨</div>
+    </div>
+    <div class="weather-card">
+      <div class="date">明天 09/15（周二）</div>
+      <div class="temp">25~32°C</div>
+      <div class="desc">多云<br>有雷阵雨</div>
+    </div>
+  </div>
+  <p class="weather-note">⚠️ 台风低压影响，广东大部雷雨频繁，佛山今明两天有中到大雨局部暴雨，请注意防御雷电和短时强降水，外出携带雨具。</p>
+
+</div>
+
+<div class="section" id="history" style="--accent:#475569">
+  <div class="section-title"><span class="ico">📅</span>历史上的今天<span class="sec-tag">纪念</span></div>
+  
+  <ul>
+    <li><strong>1867年</strong>——马克思《资本论》第一卷在德国汉堡出版。这部巨著系统阐述了剩余价值学说。</li>
+    <li><strong>1922年</strong>——安源路矿工人大罢工爆发，这是中国共产党第一次独立领导并取得完全胜利的工人斗争。</li>
+    <li><strong>1959年</strong>——北京火车站建成通车。同日，苏联发射的月球2号成功撞击月球，成为首个到达月球的人造物体。</li>
+    <li><strong>1960年</strong>——石油输出国组织（OPEC）成立，总部设在维也纳，是世界主要石油生产国协调政策的重要平台。</li>
+    <li><strong>1988年</strong>——中国再度恢复军衔制，结束了取消军衔制33年的历史。</li>
+    <li><strong>1998年</strong>——原国家主席杨尚昆在北京逝世，享年91岁。</li>
+    <li><strong>2002年</strong>——南京汤山发生特大中毒事件，造成395人中毒，其中42人死亡，事件由人为投毒引发。</li>
+  </ul>
+
+</div>
+
+<div class="section" id="word" style="--accent:#6d28d9">
+  <div class="section-title"><span class="ico">🔖</span>今日热词<span class="sec-tag">AI总结</span></div>
+  
+  <div class="hotword">
+    <div class="label">今日关键词</div>
+    <div class="word">金砖 · 仙宾礁 · 贝碧嘉 · AI开源</div>
+    <div class="desc">
+      金砖峰会持续深化"大金砖合作"，习近平首提AI开源合作倡议；南海仙宾礁菲船撤离，领土主权维护取得进展；台风贝碧嘉逼近华东沿海；AI监管与放缓迭代成全球热议话题。
+    </div>
+  </div>
+
+</div>
+
+<a class="to-top" href="#top" aria-label="回到顶部">↑</a>
+
+<div class="footer">陈老大专属早报 · 每日07:15自动推送 · 数据均来自真实搜索验证 · 宁缺毋滥，不编造不传谣</div>
+</body>
+</html>
